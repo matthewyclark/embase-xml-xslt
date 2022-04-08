@@ -11,7 +11,6 @@
 	The resulting page is simple to render and contains no Javascript
 	M Clark 2022 Elsevier  v16 March 2022
 		               v22 March 2022 update to correct the display of device manufacturers
-			       v23 April 8    add clinical trial numbers and links to clinicaltrials.gov
 -->
 
 <xsl:preserve-space elements = "*" />
@@ -293,7 +292,7 @@ headref {
   <xsl:text>Other Terms</xsl:text>
   </termt>
   
-  <xsl:for-each select="/bibrecord/explosions/explosion/mainterm">
+  <xsl:for-each select="/bibrecord/explosions/explosion/mainterm[../link/linkterm != 'ClinicalTrials.gov']">
       <term><xsl:if test="position() != 1"></xsl:if><xsl:value-of select="text()"/></term>
       <xsl:text>&#160;</xsl:text>
   </xsl:for-each>
