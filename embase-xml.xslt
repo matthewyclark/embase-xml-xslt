@@ -589,7 +589,7 @@ headref {
       		<xsl:if test="position() != 1">,&#160;</xsl:if><xsl:value-of select="."/>
 		<a>
 		 <xsl:attribute name="href">
-                 <xsl:value-of select="concat('https://clinicaltrials.gov/ct2/show/NCT00109239?term=', . )" />
+                 <xsl:value-of select="concat('https://clinicaltrials.gov/ct2/show/', . )" />
 		 </xsl:attribute>
 		 <xsl:attribute name="style">color:orange</xsl:attribute>
 		 <xsl:text >&#160;CT</xsl:text>
