@@ -11,10 +11,20 @@
 	The resulting page is simple to render and contains no Javascript
 	M Clark 2022 Elsevier  v16 March 2022
 		               v22 March 2022 update to correct the display of device manufacturers
+			       v34 April 2022 update clinical trials, and extract out links as variables to aid customization
 -->
 
 <xsl:preserve-space elements = "*" />
 <xsl:template match="/">
+
+<!-- 
+	urls to link to external records here; the identifier is appended to the end of this url
+	it may be altered here to accomodate different authentication methods
+-->
+<xsl:variable name="EMBASEURL">https://www.embase.com/records?subaction=viewrecord&amp;id=</xsl:variable>
+<xsl:variable name="REAXYSURL">https://www.reaxys.com/reaxys/secured/hopinto.do?context=S&amp;query=IDE.RN=&quot;</xsl:variable>
+<xsl:variable name="CLINTRIALSURL">https://clinicaltrials.gov/ct2/show/</xsl:variable>
+<xsl:variable name="PUBMEDURL">https://pubmed.ncbi.nlm.nih.gov/</xsl:variable>
 
 <!-- style sheet for Embase-simulated page.  this could be extracted to a separate document to be more flexible -->
 
@@ -173,7 +183,7 @@ headref {
   <div class="barofcolour">
   <ht><a class="headlink" >
   <xsl:attribute name="href">
-        <xsl:value-of select="'https://www.embase.com/records?subaction=viewrecord&amp;id='"/>
+        <xsl:value-of select="$EMBASEURL"/>
         <xsl:value-of select="/bibrecord/item-info/itemidlist/lui/text()"/>
   </xsl:attribute>
   Record Details
@@ -326,7 +336,7 @@ headref {
 <td><tlabel><xsl:text>Embase identification number (PUI)</xsl:text></tlabel></td>
 <td><t><a>
   <xsl:attribute name="href">
-        <xsl:value-of select="'https://www.embase.com/records?subaction=viewrecord&amp;id='"/>
+        <xsl:value-of select="$EMBASEURL"/>
         <xsl:value-of select="/bibrecord/item-info/itemidlist/lui/text()"/>
   </xsl:attribute>
   <xsl:attribute name="style">color:blue</xsl:attribute>
@@ -390,7 +400,7 @@ headref {
 	<td><tlabel><xsl:text>MEDLINE PMID</xsl:text></tlabel></td>
 	<td><t><a>
   	<xsl:attribute name="href">
-        	<xsl:value-of select="'https://pubmed.ncbi.nlm.nih.gov/'"/>
+        	<xsl:value-of select="$PUBMEDURL"/>
         	<xsl:value-of select="/bibrecord/item-info/itemidlist/medl"/>
   	</xsl:attribute>
 	<xsl:attribute name="style">color:blue</xsl:attribute>
@@ -513,7 +523,9 @@ headref {
       		<xsl:if test="position() != 1">,&#160;</xsl:if><xsl:value-of select="."/>
 		<a>
 		 <xsl:attribute name="href">
-                 <xsl:value-of select="concat('https://www.reaxys.com/reaxys/secured/hopinto.do?context=S&amp;query=IDE.RN=&quot;', . ,'&quot;&amp;origin=Embase&amp;ln=' )" />
+                 <xsl:value-of select="$REAXYSURL" />
+		 <xsl:value-of select="." />
+		 <xsl:value-of select="'&quot;&amp;origin=Embase&amp;ln='" />
 		 </xsl:attribute>
 		 <xsl:attribute name="style">color:orange</xsl:attribute>
 		 <xsl:text >&#160;Reaxys®</xsl:text>
@@ -589,7 +601,7 @@ headref {
       		<xsl:if test="position() != 1">,&#160;</xsl:if><xsl:value-of select="."/>
 		<a>
 		 <xsl:attribute name="href">
-                 <xsl:value-of select="concat('https://clinicaltrials.gov/ct2/show/', . )" />
+                 <xsl:value-of select="concat($CLINTRIALSURL, . )" />
 		 </xsl:attribute>
 		 <xsl:attribute name="style">color:orange</xsl:attribute>
 		 <xsl:text >&#160;CT</xsl:text>
