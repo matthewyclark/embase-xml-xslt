@@ -292,8 +292,8 @@ headref {
   <xsl:text>Other Terms</xsl:text>
   </termt>
   
-  <xsl:for-each select="/bibrecord/explosions/explosion/mainterm[../link/linkterm != 'ClinicalTrials.gov']">
-      <term><xsl:if test="position() != 1"></xsl:if><xsl:value-of select="text()"/></term>
+  <xsl:for-each select="/bibrecord/head/enhancement/descriptorgroup/descriptors/descriptor[weight= 'b' and not(link)]">
+      <term><xsl:if test="position() != 1"></xsl:if><xsl:value-of select="./mainterm"/></term>
       <xsl:text>&#160;</xsl:text>
   </xsl:for-each>
 
