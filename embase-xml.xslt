@@ -21,7 +21,7 @@
 	urls to link to external records here; the identifier is appended to the end of this url
 	it may be altered here to accomodate different authentication methods
 -->
-<xsl:variable name="EMBASEURL">https://www.embase.com/records?subaction=viewrecord&amp;id=</xsl:variable>
+<xsl:variable name="EMBASEURL">https://auth.elsevier.com/ShibAuth/institutionLogin?entityID=https://idp.takeda.com/openathens&amp;appReturnURL=https://www.preprod.embase.com/search/results/subaction=viewrecord&amp;id=</xsl:variable>
 <xsl:variable name="REAXYSURL">https://www.reaxys.com/reaxys/secured/hopinto.do?context=S&amp;query=IDE.RN=&quot;</xsl:variable>
 <xsl:variable name="CLINTRIALSURL">https://clinicaltrials.gov/ct2/show/</xsl:variable>
 <xsl:variable name="PUBMEDURL">https://pubmed.ncbi.nlm.nih.gov/</xsl:variable>
